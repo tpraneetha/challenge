@@ -11,8 +11,8 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(cors());
 app.use(express.static('src/client'))
-app.listen(8000, function () {
-    console.log('Example app listening on port 8000!')
+app.listen(8081, function () {
+    console.log('Example app listening on port 8081!')
 })
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')

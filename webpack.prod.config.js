@@ -1,9 +1,22 @@
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebPackPlugin=require ("html-webpack-plugin")
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+new CleanWebpackPlugin({
+    // Simulate the removal of files
+    dry: true,
+    // Write Logs to Console
+    verbose: true,
+    // Automatically remove all unused webpack assets on rebuild
+    cleanStaleWebpackAssets: true,
+    protectWebpackAssets: false
+})
 module.exports = {
     entry: './src/client/index.js',
-    mode:"production",
+    mode:"production",output: {
+        libraryTarget: 'var',
+        library: 'Client'
+    },
 
 module: {
     rules: [
@@ -11,7 +24,10 @@ module: {
         test: '/\.js$/',
         exclude: /node_modules/,
         loader: "babel-loader"
-            }
+            },{
+                test: /\.scss$/,
+                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+        } 
     ]
 },
 plugins:[
